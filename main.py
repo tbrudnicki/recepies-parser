@@ -6,6 +6,7 @@ from pdfminer.pdfinterp import resolve1
 import os
 
 from recepieparser.parse.planparser import PlanParser
+import pkg_resources
 
 
 def generate_pages(page_count):
@@ -13,7 +14,7 @@ def generate_pages(page_count):
 
 
 def main():
-    data_directory = '/home/follydwarf/workspace/recipes'
+    data_directory = pkg_resources.resource_filename('recepieparser', 'data/')
     plans = []
     for root, dirs, files in os.walk(data_directory, topdown=False):
         for file in files:
