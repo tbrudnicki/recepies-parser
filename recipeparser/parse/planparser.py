@@ -3,7 +3,7 @@ from pdfminer.pdfdocument import PDFDocument
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdftypes import resolve1
 
-from recepieparser.model.data import Recipe, Ingredient, Plan
+from recipeparser.model.data import Recipe, Ingredient, Plan
 
 
 class PlanParser:

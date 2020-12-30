@@ -1,6 +1,7 @@
 import os
-
-from recepieparser.parse.planparser import PlanParser
+import sqlite3
+from recipeparser.parse.planparser import PlanParser
+from recipeparser.db.db_setup import initialize_db
 import pkg_resources
 
 
@@ -9,25 +10,20 @@ def generate_pages(page_count):
 
 
 def main():
-    data_directory = pkg_resources.resource_filename('recepieparser', 'data/')
-    plans = []
-    for root, dirs, files in os.walk(data_directory, topdown=False):
-        for file in files:
-            absolute_path = os.path.join(root, file)
-            print(f'Processing file: {absolute_path}')
-            parser = PlanParser()
-            plan = parser.parse(absolute_path)
-            plans.append(plan)
-    print(len(plans))
+    data_directory = pkg_resources.resource_filename('recipeparser', 'data/')
+    # plans = []
+    # for root, dirs, files in os.walk(data_directory, topdown=False):
+    #     for file in files:
+    #         absolute_path = os.path.join(root, file)
+    #         print(f'Processing file: {absolute_path}')
+    #         parser = PlanParser()
+    #         plan = parser.parse(absolute_path)
+    #         plans.append(plan)
+    # print(len(plans))
 
-    #
-    # i = 0
-    # output = StringIO()
-    # with open('/ubuntu-data/Downloads/TBR-3000_1.pdf', 'rb') as pdf_file:
-    #     extract_text_to_fp(pdf_file, output, laparams=LAParams(), output_type='html', codec=None)
-    #
-    # with open('/ubuntu-data/Downloads/example.html', 'a') as html_file:
-    #     html_file.write(output.getvalue())
+    db_directory = pkg_resources.resource_filename('recipeparser', 'data/db')
+    db_path = os.path.join(db_directory, 'recipes.db')
+    initialize_db(db_path)
 
 
 # Press the green button in the gutter to run the script.
