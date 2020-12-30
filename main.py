@@ -1,8 +1,3 @@
-import camelot
-from pdfminer.pdfparser import PDFParser
-from pdfminer.pdfdocument import PDFDocument
-from pdfminer.pdfpage import PDFPage
-from pdfminer.pdfinterp import resolve1
 import os
 
 from recepieparser.parse.planparser import PlanParser
