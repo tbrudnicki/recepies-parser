@@ -11,21 +11,15 @@ recipe_table_create = """CREATE TABLE IF NOT EXISTS recipe (
 
 ingredient_table_create = """CREATE TABLE IF NOT EXISTS ingredient (
     id integer primary key,
+    recipe_id integer,
     name text not null,
     quantity float,
-    quantity_text not null 
-    )
-"""
-recipe_ingredient_table_create = """CREATE TABLE IF NOT EXISTS recipe_ingredient (
-    id integer primary key,
-    recipe_id integer,
-    ingredient_id integer,
+    quantity_text not null,
     foreign key (recipe_id) REFERENCES recipe(id) ON DELETE CASCADE 
-         ON UPDATE NO ACTION,
-    foreign key (ingredient_id) REFERENCES ingredient(id) ON DELETE CASCADE 
-         ON UPDATE NO ACTION
+         ON UPDATE NO ACTION 
     )
 """
+
 
 text_index_table_create = """CREATE VIRTUAL TABLE IF NOT EXISTS recipe_text_index 
     USING FTS5(recipe_name, ingredients)
@@ -38,7 +32,6 @@ def initialize_db(db_path):
         cursor = connection.cursor()
         cursor.execute(recipe_table_create)
         cursor.execute(ingredient_table_create)
-        cursor.execute(recipe_ingredient_table_create)
         cursor.execute(text_index_table_create)
 
         connection.commit()
